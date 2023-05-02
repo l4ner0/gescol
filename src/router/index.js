@@ -1,19 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import DashboardPage from '../pages/DashboardPage.vue'
+import paths from './paths'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: DashboardPage
-  },
-]
-
 const router = new VueRouter({
-  routes
+  base: '/',
+  mode: 'hash',
+  linkActiveClass: 'active',
+  routes: paths
 })
 
 export default router

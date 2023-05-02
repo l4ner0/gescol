@@ -1,20 +1,42 @@
+import { PATHS } from "@/utils/routeConstants";
+
 const Menu = [
   { header: 'Apps' },
   {
     title: 'Dashboard',
     group: 'apps',
     icon: 'mdi-view-dashboard',
-    name: 'Dashboard',
+    name: 'dashboard',
+    to: PATHS.dashboard.pathBase
   },
-  { header: 'UI Elements' },
+  { divider: true },
+  { header: 'Recepción' },
   {
-    title: 'Pickers',
-    group: 'pickers',
-    component: 'picker',
-    icon: 'mdi-image-filter-vintage',
+    title: 'Generar Tickets',
+    group: 'tickets',
+    icon: 'mdi-ticket-account',
+    name: 'generar-tickets',
+    to: `${PATHS.ticket.pathBase}${PATHS.ticket.generateTicket}`
+  },
+  { header: 'Monitor' },
+  {
+    title: 'Monitor de espera',
+    group: 'monitor',
+    icon: 'mdi-monitor-multiple',
     items: [
-      { name: 'timepicker', title: 'Timepicker', component: 'pickers/timepicker' },
-      { name: 'datepicker', title: 'Datepicker', component: 'pickers/datepicker' },
+      { name: 'asignacion', title: 'Asignacion', to: `${PATHS.monitor.pathBase}${PATHS.monitor.assignmentMonitor}` },
+      { name: 'atencion', title: 'Atención', to: `${PATHS.monitor.pathBase}${PATHS.monitor.attentionMonitor}` },
+
+    ]
+  },
+  { header: 'Asesor' },
+  {
+    title: 'Asignacion de box',
+    group: 'box',
+    icon: 'mdi-account-box',
+    items: [
+      { name: 'asignacion', title: 'Asignacion', to: `${PATHS.box.pathBase}${PATHS.box.assignmentBox}` },
+      { name: 'atencion', title: 'Atención', to: `${PATHS.box.pathBase}${PATHS.box.attentionBox}` },
 
     ]
   },

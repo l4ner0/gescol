@@ -34,7 +34,7 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item v-for="subItem in item.items" :key="subItem.title">
+          <v-list-item v-for="subItem in item.items" :key="subItem.title" :to="subItem.to">
             <v-list-item-content>
               <v-list-item-title>{{ subItem.title }}</v-list-item-title>
             </v-list-item-content>
@@ -45,7 +45,7 @@
         }}</v-subheader>
         <v-divider v-else-if="item.divider" :key="i"></v-divider>
         <v-list-item-group v-else :key="i">
-          <v-list-item>
+          <v-list-item :to="item.to">
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -73,17 +73,6 @@ export default {
         { title: "About", icon: "mdi-forum" },
       ],
     };
-  },
-  methods: {
-    genChildTarget(item, subItem) {
-      if (subItem.href) return;
-      if (subItem.component) {
-        return {
-          name: subItem.component,
-        };
-      }
-      return { name: `${item.group}/${subItem.name}` };
-    },
   },
   created() {
     window.getApp.$on("APP_DRAWER_TOGGLED", () => {
