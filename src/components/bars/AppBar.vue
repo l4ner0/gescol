@@ -2,7 +2,7 @@
   <v-app-bar app color="deep-purple accent-4" dark>
     <v-app-bar-nav-icon @click.stop="handleDrawerToggle"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
-    <v-btn icon>
+    <v-btn icon @click="handleFullScreen()">
       <v-icon>mdi-fullscreen</v-icon>
     </v-btn>
     <v-menu
@@ -19,8 +19,8 @@
         </v-btn>
       </template>
 
-      <v-list class="pa-0">
-        <v-list-item v-for="(item, index) in items" :key="index">
+      <v-list dense class="pa-0">
+        <v-list-item v-for="(item, index) in items" :key="index" link>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { toggleFullScreen } from '@/utils/fullScreen';
 export default {
   name: "AppBar",
   data() {
@@ -70,6 +71,9 @@ export default {
     handleDrawerToggle () {
       window.getApp.$emit('APP_DRAWER_TOGGLED');
     },
+    handleFullScreen () {
+     toggleFullScreen();
+    }
   }
 };
 </script>
