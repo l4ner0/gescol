@@ -1,13 +1,9 @@
 <template>
-  <div>Attention Box Page</div>
+  <div>DashboardPage</div>
 </template>
 
 <script>
 export default {
-
-}
+  name: 'DashboardPage',
+};
 </script>
-
-<style>
-
-</style>

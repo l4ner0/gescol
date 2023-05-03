@@ -36,45 +36,29 @@
 <script>
 import { toggleFullScreen } from '@/utils/fullScreen';
 export default {
-  name: "AppBar",
+  name: 'AppBar',
   data() {
     return {
       items: [
         {
-          icon: "mdi-account-circle",
-          href: "#",
-          title: "Profile",
-          click: (e) => {
-            console.log(e);
-          },
-        },
-        {
-          icon: "mdi-settings",
-          href: "#",
-          title: "Settings",
-          click: (e) => {
-            console.log(e);
-          },
-        },
-        {
-          icon: "mdi-fullscreen-exit",
-          href: "#",
-          title: "Logout",
+          icon: 'mdi-fullscreen-exit',
+          href: '#',
+          title: 'Logout',
           click: () => {
-            window.getApp.$emit("APP_LOGOUT");
+            window.getApp.$emit('APP_LOGOUT');
           },
         },
       ],
     };
   },
   methods: {
-    handleDrawerToggle () {
+    handleDrawerToggle() {
       window.getApp.$emit('APP_DRAWER_TOGGLED');
     },
-    handleFullScreen () {
-     toggleFullScreen();
-    }
-  }
+    handleFullScreen() {
+      toggleFullScreen();
+    },
+  },
 };
 </script>
 

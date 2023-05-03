@@ -1,4 +1,4 @@
-import { PATHS } from "@/utils/routeConstants";
+import { PATHS } from '@/utils/routeConstants';
 
 const Menu = [
   { header: 'Apps' },
@@ -7,7 +7,7 @@ const Menu = [
     group: 'apps',
     icon: 'mdi-view-dashboard',
     name: 'dashboard',
-    to: PATHS.dashboard.pathBase
+    to: PATHS.dashboard.pathBase,
   },
   { divider: true },
   { header: 'Recepción' },
@@ -16,7 +16,7 @@ const Menu = [
     group: 'tickets',
     icon: 'mdi-ticket-account',
     name: 'generar-tickets',
-    to: `${PATHS.ticket.pathBase}${PATHS.ticket.generateTicket}`
+    to: `${PATHS.ticket.pathBase}${PATHS.ticket.generateTicket}`,
   },
   { header: 'Monitor' },
   {
@@ -24,10 +24,17 @@ const Menu = [
     group: 'monitor',
     icon: 'mdi-monitor-multiple',
     items: [
-      { name: 'asignacion', title: 'Asignacion', to: `${PATHS.monitor.pathBase}${PATHS.monitor.assignmentMonitor}` },
-      { name: 'atencion', title: 'Atención', to: `${PATHS.monitor.pathBase}${PATHS.monitor.attentionMonitor}` },
-
-    ]
+      {
+        name: 'asignacion',
+        title: 'Asignacion',
+        to: `${PATHS.monitor.pathBase}${PATHS.monitor.assignmentMonitor}`,
+      },
+      {
+        name: 'atencion',
+        title: 'Atención',
+        to: `${PATHS.monitor.pathBase}${PATHS.monitor.attentionMonitor}`,
+      },
+    ],
   },
   { header: 'Asesor' },
   {
@@ -35,10 +42,17 @@ const Menu = [
     group: 'box',
     icon: 'mdi-account-box',
     items: [
-      { name: 'asignacion', title: 'Asignacion', to: `${PATHS.box.pathBase}${PATHS.box.assignmentBox}` },
-      { name: 'atencion', title: 'Atención', to: `${PATHS.box.pathBase}${PATHS.box.attentionBox}` },
-
-    ]
+      {
+        name: 'asignacion',
+        title: 'Asignacion',
+        to: `${PATHS.box.pathBase}${PATHS.box.assignmentBox}`,
+      },
+      {
+        name: 'atencion',
+        title: 'Atención',
+        to: `${PATHS.box.pathBase}${PATHS.box.attentionBox}`,
+      },
+    ],
   },
   { divider: true },
   { header: 'Extras' },
@@ -47,11 +61,11 @@ const Menu = [
     group: 'extra',
     icon: 'mdi-format-list-bulleted',
     items: [
-      { name: 'Login', title: 'Login', component: 'Login' },
+      { name: 'Login', title: 'Login', to: PATHS.login.pathBase },
       { name: '404', title: '404', component: 'NotFound' },
       { name: '403', title: '403', component: 'AccessDenied' },
       { name: '500', title: '500', component: 'ServerError' },
-    ]
+    ],
   },
 ];
 // reorder menu
@@ -60,7 +74,7 @@ Menu.forEach((item) => {
     item.items.sort((x, y) => {
       let textA = x.title.toUpperCase();
       let textB = y.title.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
     });
   }
 });

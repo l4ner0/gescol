@@ -34,7 +34,11 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item v-for="subItem in item.items" :key="subItem.title" :to="subItem.to">
+          <v-list-item
+            v-for="subItem in item.items"
+            :key="subItem.title"
+            :to="subItem.to"
+          >
             <v-list-item-content>
               <v-list-item-title>{{ subItem.title }}</v-list-item-title>
             </v-list-item-content>
@@ -60,22 +64,18 @@
 </template>
 
 <script>
-import menu from "@/api/menu";
+import menu from '@/api/menu';
 export default {
-  name: "AppDrawer",
+  name: 'AppDrawer',
   data() {
     return {
       mini: false,
       drawer: true,
       menus: menu,
-      items: [
-        { title: "Home", icon: "mdi-view-dashboard" },
-        { title: "About", icon: "mdi-forum" },
-      ],
     };
   },
   created() {
-    window.getApp.$on("APP_DRAWER_TOGGLED", () => {
+    window.getApp.$on('APP_DRAWER_TOGGLED', () => {
       this.drawer = !this.drawer;
     });
   },

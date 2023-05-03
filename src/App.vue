@@ -1,32 +1,22 @@
 <template>
-  <v-app>
-    <AppDrawer />
-    <AppBar />
-    <v-main>
-      <!-- Provides the application the proper gutter -->
-      <v-container fluid>
+  <div>
+    <template v-if="$route.meta.private">
+      <AdminDesign>
         <router-view></router-view>
-      </v-container>
-    </v-main>
-
-    <v-footer app> footer </v-footer>
-  </v-app>
+      </AdminDesign>
+    </template>
+    <template v-else>
+      <router-view></router-view>
+    </template>
+  </div>
 </template>
 
 <script>
-import AppDrawer from "./components/navigations/AppDrawer";
-import AppBar from "./components/bars/AppBar";
+import AdminDesign from '@/layouts/AdminDesign';
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    AppDrawer,
-    AppBar,
-  },
-  data: () => ({
-    //
-  }),
-  created() {
-    window.getApp = this;
+    AdminDesign,
   },
 };
 </script>

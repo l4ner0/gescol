@@ -1,86 +1,176 @@
-import { PATHS } from "@/utils/routeConstants";
+import { PATHS } from '@/utils/routeConstants';
 
 export default [
-    {
-        path: '/',
-        meta: {},
-        name: 'Root',
-        redirect: {
-            name: 'Dashboard'
-        }
+  {
+    path: '/',
+    meta: {},
+    name: 'Root',
+    redirect: {
+      name: 'DashboardPage',
     },
-    {
-        path: `${PATHS.dashboard.pathBase}`,
-        name: 'Dashboard',
-        component: () => import(
-            /* webpackChunkName: "routes" */
-            /* webpackMode: "lazy-once" */
-            `@/pages/DashboardPage`
-        )
-    },
+  },
 
-    /* Ticket */
-    {
-        path: `${PATHS.ticket.pathBase}${PATHS.ticket.generateTicket}`,
+  /* ############################# */
+  /*         PRIVATE PAGES         */
+  /* ############################# */
+
+  {
+    path: PATHS.dashboard.pathBase,
+    name: 'DashboardPage',
+    meta: {
+      private: true,
+    },
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy-once" */
+        `@/pages/private/DashboardPage`
+      ),
+  },
+
+  /* Ticket */
+  {
+    path: PATHS.ticket.pathBase,
+    name: 'TicketPage',
+    meta: {
+      private: true,
+    },
+    components: {
+      default: () =>
+        import(
+          /* webpackChunkName: "routes" */
+          /* webpackMode: "lazy-once" */
+          `@/pages/private/ticket`
+        ),
+    },
+    children: [
+      {
+        path: PATHS.ticket.generateTicket,
         name: 'GenerateTicket',
-        props: true,
+        meta: {
+          private: true,
+        },
         components: {
-            default: () => import(
-                /* webpackChunkName: "routes" */
-                /* webpackMode: "lazy-once" */
-                `@/pages/ticket/GenerateTicket`
+          default: () =>
+            import(
+              /* webpackChunkName: "routes" */
+              /* webpackMode: "lazy-once" */
+              `@/pages/private/ticket/GenerateTicket`
             ),
-        }
+        },
+      },
+    ],
+  },
+  /* Monitor */
+  {
+    path: PATHS.monitor.pathBase,
+    name: 'MonitorPage',
+    meta: {
+      private: true,
     },
-    /* Monitor */
-    {
-        path: `${PATHS.monitor.pathBase}${PATHS.monitor.assignmentMonitor}`,
+    components: {
+      default: () =>
+        import(
+          /* webpackChunkName: "routes" */
+          /* webpackMode: "lazy-once" */
+          `@/pages/private/monitor`
+        ),
+    },
+    children: [
+      {
+        path: PATHS.monitor.assignmentMonitor,
         name: 'AssignmentMonitor',
-        props: true,
+        meta: {
+          private: true,
+        },
         components: {
-            default: () => import(
-                /* webpackChunkName: "routes" */
-                /* webpackMode: "lazy-once" */
-                `@/pages/monitor/AssignmentMonitor`
+          default: () =>
+            import(
+              /* webpackChunkName: "routes" */
+              /* webpackMode: "lazy-once" */
+              `@/pages/private/monitor/AssignmentMonitor`
             ),
-        }
-    },
-    {
-        path: `${PATHS.monitor.pathBase}${PATHS.monitor.attentionMonitor}`,
+        },
+      },
+      {
+        path: PATHS.monitor.attentionMonitor,
         name: 'AttentionMonitor',
-        props: true,
+        meta: {
+          private: true,
+        },
         components: {
-            default: () => import(
-                /* webpackChunkName: "routes" */
-                /* webpackMode: "lazy-once" */
-                `@/pages/monitor/AttentionMonitor`
+          default: () =>
+            import(
+              /* webpackChunkName: "routes" */
+              /* webpackMode: "lazy-once" */
+              `@/pages/private/monitor/AttentionMonitor`
             ),
-        }
-    },
+        },
+      },
+    ],
+  },
 
-    /* Box */
-    {
-        path: `${PATHS.box.pathBase}${PATHS.box.assignmentBox}`,
+  /* Box */
+  {
+    path: PATHS.box.pathBase,
+    name: 'BoxPage',
+    meta: {
+      private: true,
+    },
+    components: {
+      default: () =>
+        import(
+          /* webpackChunkName: "routes" */
+          /* webpackMode: "lazy-once" */
+          `@/pages/private/box`
+        ),
+    },
+    children: [
+      {
+        path: PATHS.box.assignmentBox,
         name: 'AssignmentBox',
-        props: true,
+        meta: {
+          private: true,
+        },
         components: {
-            default: () => import(
-                /* webpackChunkName: "routes" */
-                /* webpackMode: "lazy-once" */
-                `@/pages/box/AssignmentBox`
+          default: () =>
+            import(
+              /* webpackChunkName: "routes" */
+              /* webpackMode: "lazy-once" */
+              `@/pages/private/box/AssignmentBox`
             ),
-        }
-    },
-    {
-        path: `${PATHS.box.pathBase}${PATHS.box.attentionBox}`,
+        },
+      },
+      {
+        path: PATHS.box.attentionBox,
         name: 'AttentionBox',
-        props: true,
+        meta: {
+          private: true,
+        },
         components: {
-            default: () => import(
-                /* webpackChunkName: "routes" */
-                /* webpackMode: "lazy-once" */
-                `@/pages/box/AttentionBox`
+          default: () =>
+            import(
+              /* webpackChunkName: "routes" */
+              /* webpackMode: "lazy-once" */
+              `@/pages/private/box/AttentionBox`
             ),
-        }
-    },
-]
+        },
+      },
+    ],
+  },
+
+  /* ############################# */
+  /*         PUBLIC PAGES          */
+  /* ############################# */
+
+  {
+    path: PATHS.login.pathBase,
+    name: 'LoginPage',
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy-once" */
+        `@/pages/public/LoginPage`
+      ),
+  },
+];
