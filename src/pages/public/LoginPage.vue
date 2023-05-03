@@ -62,6 +62,7 @@ export default {
     login() {
       this.loading = true;
       setTimeout(() => {
+        localStorage.setItem('jwt', '4444444');
         this.$router.push(PATHS.dashboard.pathBase);
       }, 1000);
     },

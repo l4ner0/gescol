@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  web:
+    image: registry.devacceso.com/${CI_PROJECT_NAME}:${CI_PIPELINE_ID}
+    build:
+      context: .
+      args:
+        NAME_ENV: ${ENVDEPLOY}
+    restart: always
+    environment:
+      - TZ=America/Lima
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    extra_hosts:
+      - "workflow.pe:10.3.3.112"
+      - "alteryx.acceso.com.pe:192.168.4.128"
+      - "api.acr.pe:192.168.4.224"
+      - "api.acceso.com.pe:192.168.4.161"
+      - "sd1.accesocrediticio.com:10.3.3.122"
+      - "kong-prueba.acceso.com.pe:192.168.4.136"
+    logging:
+      driver: "gelf"
+      options:
+        gelf-address: "udp://192.168.4.239:12201"
+        tag: ${CI_PROJECT_NAME}
+    networks:
+      - traefik-public
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.name == ${NODO}
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.${SUBDOMINIO}.rule=Host(`${SUBDOMINIO}.${DOMINIO}`)"
+        - "traefik.http.routers.${SUBDOMINIO}.entrypoints=websecure"
+        - "traefik.http.routers.${SUBDOMINIO}.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.${SUBDOMINIO}.loadbalancer.server.port=80"
+networks:
+  traefik-public:
+    external: true

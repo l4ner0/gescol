@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import menu from '@/api/menu';
+import menu from '@/utils/menu';
 export default {
   name: 'AppDrawer',
   data() {

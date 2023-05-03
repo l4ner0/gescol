@@ -20,7 +20,12 @@
       </template>
 
       <v-list dense class="pa-0">
-        <v-list-item v-for="(item, index) in items" :key="index" link>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          link
+          @click="item.click()"
+        >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -34,6 +39,7 @@
 </template>
 
 <script>
+import { PATHS } from '@/utils/routeConstants';
 import { toggleFullScreen } from '@/utils/fullScreen';
 export default {
   name: 'AppBar',
@@ -45,7 +51,8 @@ export default {
           href: '#',
           title: 'Logout',
           click: () => {
-            window.getApp.$emit('APP_LOGOUT');
+            localStorage.removeItem('jwt');
+            this.$router.push(PATHS.login.pathBase);
           },
         },
       ],

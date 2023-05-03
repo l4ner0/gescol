@@ -1,4 +1,6 @@
 import { PATHS } from '@/utils/routeConstants';
+import auth from '@/middleware/auth';
+import redirectHome from '@/middleware/redirectHome';
 
 export default [
   {
@@ -19,6 +21,7 @@ export default [
     name: 'DashboardPage',
     meta: {
       private: true,
+      middleware: auth,
     },
     component: () =>
       import(
@@ -34,6 +37,7 @@ export default [
     name: 'TicketPage',
     meta: {
       private: true,
+      middleware: auth,
     },
     components: {
       default: () =>
@@ -49,6 +53,7 @@ export default [
         name: 'GenerateTicket',
         meta: {
           private: true,
+          middleware: auth,
         },
         components: {
           default: () =>
@@ -67,6 +72,7 @@ export default [
     name: 'MonitorPage',
     meta: {
       private: true,
+      middleware: auth,
     },
     components: {
       default: () =>
@@ -82,6 +88,7 @@ export default [
         name: 'AssignmentMonitor',
         meta: {
           private: true,
+          middleware: auth,
         },
         components: {
           default: () =>
@@ -97,6 +104,7 @@ export default [
         name: 'AttentionMonitor',
         meta: {
           private: true,
+          middleware: auth,
         },
         components: {
           default: () =>
@@ -116,6 +124,7 @@ export default [
     name: 'BoxPage',
     meta: {
       private: true,
+      middleware: auth,
     },
     components: {
       default: () =>
@@ -131,6 +140,7 @@ export default [
         name: 'AssignmentBox',
         meta: {
           private: true,
+          middleware: auth,
         },
         components: {
           default: () =>
@@ -146,6 +156,7 @@ export default [
         name: 'AttentionBox',
         meta: {
           private: true,
+          middleware: auth,
         },
         components: {
           default: () =>
@@ -166,6 +177,9 @@ export default [
   {
     path: PATHS.login.pathBase,
     name: 'LoginPage',
+    meta: {
+      middleware: redirectHome,
+    },
     component: () =>
       import(
         /* webpackChunkName: "routes" */
